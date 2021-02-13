@@ -2,19 +2,15 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
-
+import pymysql
 
 class Register:
     '''Responsible for showing data into the window'''
 
     def __init__(self, root):
-        # Shows root file to the window
         self.root = root
-        # Shows window title
         self.root.title("Registration Window")
-        # Shows window screen's height and width
         self.root.geometry("1350x700+0+0")
-        # set background color to white
         self.root.config(bg='white')
 
         # ===== Background Image ========
@@ -81,6 +77,17 @@ class Register:
         
         signin_btn = Button(self.root, text="Sign In", font=('times new roman', 20),bd=0, fg='white', bg='green', cursor='hand2').place(x=160,y=470,width=150)
 
+    def clear(self):
+        self.txt_fname.delete(0,END)
+        self.txt_lname.delete(0,END)
+        self.txt_contact.delete(0,END)
+        self.txt_email.delete(0,END)
+        self.txt_password.delete(0,END)
+        self.txt_cpassword.delete(0,END)
+        self.txt_answer.delete(0,END)
+        self.cmb_quest.current(0)
+
+
     def register_data(self):
         if self.txt_fname.get() == "" \
             or self.txt_lname.get() == "" \
@@ -95,15 +102,35 @@ class Register:
         elif self.var_chk.get() == 0:
             messagebox.showerror('Error', 'Please agree our terms & condition', parent=self.root)
         else:
-            messagebox.showinfo('Success', 
-            f'Name:\t{self.txt_fname.get()} {self.txt_lname.get()},\
-            \nContact:\t{self.txt_contact.get()}\
-            \nEmail:\t{self.txt_email.get()}\
-            \nCmb:\t{self.cmb_quest.get()}\
-            \nAnswer:\t{self.txt_answer.get()}\
-            \nPassword:\t{self.txt_password.get()}\
-            \nConfirm:\t{self.txt_cpassword.get()}'\
-            )
+            try:
+                con= pymysql.connect(host='localhost', user='root', password='', database='employee')
+                cur = con.cursor()
+
+                cur.execute('SELECT * FROM emp WHERE email=%s', self.txt_email.get())
+                row = cur.fetchone()
+                if row != None:
+                    messagebox.showerror('Error', 'User Already Exists With This Email', parent=self.root)
+                else:
+                    cur.execute("INSERT INTO emp (fname, lname, contact, email, question, password, answer) VALUES(%s, %s, %s, %s, %s, %s, %s)",
+                        (
+                            self.txt_fname.get(),
+                            self.txt_lname.get(),
+                            self.txt_contact.get(),
+                            self.txt_email.get(),
+                            self.cmb_quest.get(),
+                            self.txt_password.get(),
+                            self.txt_answer.get()
+                        ))
+                    con.commit()
+                    self.clear()
+                    messagebox.showinfo('Success', 'User Created Successfully', parent=self.root)
+                con.close()
+
+            except Exception as e:
+                messagebox.showerror('Error',f'Error due to: {str(e)}', parent=self.root)
+
+
+
 
         print(f'Name:\t{self.txt_fname.get()} {self.txt_lname.get()},\
         \nContact:\t{self.txt_contact.get()}\
