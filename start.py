@@ -21,7 +21,7 @@ for gc in graphic_cards:
     gc_status = gc.p.text
     gc_price = gc.find("li", {"class":"price-current"}).strong.text
 
-    f.write(gc_brand + "," + gc_title.replace(",", "|") + "," + gc_rating + "," + gc_status + "," + gc_price + "\n")
+    f.write(gc_brand.replace(",", " ") + "," + gc_title.replace(",", "|") + "," + gc_rating.replace("-", "") + "," + gc_status + "," + gc_price.replace(",", "") + "\n")
     # print(gc_title)
     # print(gc_brand)
     # print(gc_rating)
