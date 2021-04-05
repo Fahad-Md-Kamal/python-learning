@@ -1,0 +1,4 @@
+collect city and county database form this url: 
+https://dev.maxmind.com/
+
+place those files in this geoip directory
