@@ -1,0 +1,23 @@
+- Install celery
+    pip install celery
+- Install RabbitMQ
+    sudo apt-get install rabbitmq-server
+
+- Enable rabbitmq
+    sudo systemctl enable rabbitmq-server
+
+- Start rabbitmq
+    sudo systemctl start rabbitmq-server
+
+- Stop rabbitmq
+    sudo rabbitmqctl stop
+
+- Check rabbitmq server
+    systemctl status rabbitmq-server
+
+
+- Run Celery
+    celery -A NAMEOFINSTANCE worker --loglevel=info
+    celery -A (proj) worker --loglevel=info
+
+
