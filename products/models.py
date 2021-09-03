@@ -22,5 +22,5 @@ class Purchase(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"Sold {self.product.name} - {self.quantity} items for {self.total_price}"
+        return f"Sold {self.quantity} - {self.product.name} - for {self.total_price}"
     
