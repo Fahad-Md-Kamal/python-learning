@@ -3,12 +3,39 @@
 {% block title %} Performance {% endblock title %}
 
 {% block content %}
-<h1>Hello World</h1>
-{{ products | safe }}
-<hr>
-{{ purchase | safe }}
-<hr>
 {{ df | safe }}
+<hr>
+
+<div>
+    <form action="" method="POST" class="ui form">
+        {% csrf_token %}
+        <div class="three field">
+            <label>Choose a chart type: </label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="sales">
+                <i class="dropdown icon"></i>
+                <div class="default text">----</div>
+                <div class="menu">
+                    <div class="item" value="bar">Bar Plot</div>
+                    <div class="item" value="line">Line Plot</div>
+                    <div class="item" value="count">Count Plot</div>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+            <label>Date From: </label>
+            <input type="date" name="date_from">
+            </div>
+            <div class="field">
+            <label>Date To: </label>
+            <input type="date" name="date_to">
+            </div>
+        </div>
+        <button type="submit" class="ui primary button">Select</button>
+    </form>
+
+</div>
 
 {% endblock content %}
 
