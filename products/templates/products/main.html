@@ -7,16 +7,21 @@
 
 <div>
     {% if error_message %}
-       <div class="ui red message"> {{ error_message }}</div>
+    <div class="ui negative message">
+        <i class="close icon"></i>
+        <div class="header">
+            {{ error_message }}
+        </div>
+    </div>
     {% endif %}
-    
+
     {% if request.POST %}
-        {% if graph %}
-            <img src="data:image/png;base64, {{graph | safe}}">
-        {% endif %}
-        
+    {% if graph %}
+    <img src="data:image/png;base64, {{graph | safe}}">
     {% endif %}
-    
+
+    {% endif %}
+
     <form action="" method="POST" class="ui form">
         {% csrf_token %}
         <div class="three field">
@@ -34,12 +39,12 @@
         </div>
         <div class="two fields">
             <div class="field">
-            <label>Date From: </label>
-            <input type="date" name="date_from">
+                <label>Date From: </label>
+                <input type="date" name="date_from">
             </div>
             <div class="field">
-            <label>Date To: </label>
-            <input type="date" name="date_to">
+                <label>Date To: </label>
+                <input type="date" name="date_to">
             </div>
         </div>
         <button type="submit" class="ui primary button">Select</button>
