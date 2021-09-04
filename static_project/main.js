@@ -9,6 +9,9 @@ $(document).ready(function () {
         .closest('.message')
         .transition('fade')
         ;
-    })
-    ;
+    });
+
+  $('#modal-btn').click(function () {
+    $('.ui.modal').modal('show');
+  });
 })

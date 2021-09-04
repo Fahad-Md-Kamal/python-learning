@@ -3,7 +3,24 @@
 {% block title %} Performance {% endblock title %}
 
 {% block content %}
-<hr>
+
+
+<div class="ui modal mymodal">
+    <div class="header">
+        <h1> Price Data </h1>
+    </div>
+    <div class="ui container">
+        <ul>
+            <li><strong>Count: </strong>{{ price.count }}</li>
+            <li><strong>Mean: </strong>{{ price.mean|floatformat }}</li>
+            <li><strong>Medain: </strong>{{ price.median }}</li>
+            <li><strong>Min: </strong>{{ price.min }}</li>
+            <li><strong>Max: </strong>{{ price.max }}</li>
+            <li><strong>Std Dev: </strong>{{ price.std|floatformat }}</li>
+        </ul>
+    </div>
+</div>
+
 
 <div>
     {% if error_message %}
@@ -17,7 +34,11 @@
 
     {% if request.POST %}
     {% if graph %}
+    <div class="block-center">
+
     <img src="data:image/png;base64, {{graph | safe}}">
+    
+    </div>
     {% endif %}
 
     {% endif %}
@@ -47,9 +68,13 @@
                 <input type="date" name="date_to">
             </div>
         </div>
-        <button type="submit" class="ui primary button">Select</button>
+        <div class="block-center">
+            <button type="submit" class="ui primary button">Select</button>
+        </div>
     </form>
-
+        <div class="block-center">
+            <button class="ui secondary button" id="modal-btn">See Summary</button>
+</div>
 </div>
 
 {% endblock content %}
