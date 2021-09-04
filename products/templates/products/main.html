@@ -36,8 +36,8 @@
     {% if graph %}
     <div class="block-center">
 
-    <img src="data:image/png;base64, {{graph | safe}}">
-    
+        <img src="data:image/png;base64, {{graph | safe}}">
+
     </div>
     {% endif %}
 
@@ -72,11 +72,12 @@
             <button type="submit" class="ui primary button">Select</button>
         </div>
     </form>
-        <div class="block-center">
-            <button class="ui secondary button" id="modal-btn">See Summary</button>
-</div>
+    <div class="block-center">
+        <button class="ui secondary button" id="modal-btn">See Summary</button>
+        <br>
+        <a href="{% url 'products:add-purchase-view' %}" class="ui positive button">Add records</a>
+    </div>
+
 </div>
 
 {% endblock content %}
-
-<!--  -->

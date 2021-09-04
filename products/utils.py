@@ -34,20 +34,21 @@ def get_simple_plot(chart_type, *args, **kwargs):
     data = kwargs.get('data')
 
     if chart_type == 'bar plot':
-        title = "Bar Chart"
+        title = "total price by day (bar)"
         plt.title(title)
         plt.bar(x, y)
 
     elif chart_type == 'line plot':
-        title = "Line Chart"
+        title = "total price by day (line)"
         plt.title(title)
         plt.plot(x, y)
 
     else:
-        title = "Sold Products"
+        title = "Product Count"
         plt.title(title)
         sns.countplot('name', data=data)
 
+    plt.xticks(rotation=45)
     plt.tight_layout()
 
     graph = get_image()
