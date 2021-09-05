@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'products',
     'csvs',
+    'customers',
 ]
 
 MIDDLEWARE = [

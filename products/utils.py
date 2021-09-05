@@ -1,9 +1,13 @@
+from django.contrib.auth.models import User
 from matplotlib import image
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
 import base64
 
+def get_salesman_from_id(val):
+    salesman = User.objects.get(id=val)
+    return salesman
 
 def get_image():
     # create a bytes buffer for the image to save

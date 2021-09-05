@@ -1,6 +1,8 @@
 {% url 'products:product-list' as path_to_performance %}
 {% url 'products:add-purchase-view' as path_to_adding_records %}
+{% url 'products:sales-view' as path_to_sales_view %}
 {% url 'csvs:upload-view' as path_to_upload_csv %}
+{% url 'customers:main-customers-view' as path_to_main_customers_view %}
 
 <div class="ui secondary pointing menu">
     <a class="item">
@@ -9,15 +11,21 @@
     <a href="{{ path_to_performance }}" class="{% if request.path == path_to_performance %} active {% endif %} item">
         Performance
     </a>
-    <a href="{{ path_to_adding_records }}" class="{% if request.path == path_to_adding_records %} active {% endif %} item">
+    <a href="{{ path_to_sales_view }}" class="{% if request.path == path_to_sales_view %} active {% endif %} item">
+        Sales
+    </a>
+    <a href="{{ path_to_main_customers_view }}" class="{% if request.path == path_to_main_customers_view %} active {% endif %} item">
+        Customers
+    </a>
+    <a href="{{ path_to_adding_records }}"
+        class="{% if request.path == path_to_adding_records %} active {% endif %} item">
         Add records
     </a>
     <a href="{{ path_to_upload_csv }}" class="{% if request.path == path_to_upload_csv %} active {% endif %} item">
         Upload file
-    </a>
-    <div class="right menu">
-        <a class="ui item">
-            Logout
-        </a>
-    </div>
+        <div class="right menu">
+            <a class="ui item">
+                Logout
+            </a>
+        </div>
 </div>
