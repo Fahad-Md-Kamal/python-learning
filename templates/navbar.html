@@ -1,5 +1,6 @@
 {% url 'products:product-list' as path_to_performance %}
 {% url 'products:add-purchase-view' as path_to_adding_records %}
+{% url 'csvs:upload-view' as path_to_upload_csv %}
 
 <div class="ui secondary pointing menu">
     <a class="item">
@@ -10,6 +11,9 @@
     </a>
     <a href="{{ path_to_adding_records }}" class="{% if request.path == path_to_adding_records %} active {% endif %} item">
         Add records
+    </a>
+    <a href="{{ path_to_upload_csv }}" class="{% if request.path == path_to_upload_csv %} active {% endif %} item">
+        Upload file
     </a>
     <div class="right menu">
         <a class="ui item">
