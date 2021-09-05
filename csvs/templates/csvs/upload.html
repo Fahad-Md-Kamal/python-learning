@@ -4,6 +4,28 @@
 
 {% block content %}
 
-<h1>Upload CSV</h1>
+{% if success_message %}
+    <div class="ui success message">
+        <i class="close icon"></i>
+        <div class="header">
+            {{ success_message }}
+        </div>
+    </div>
+{% endif %}
 
+{% if error_message %}
+    <div class="ui negative message">
+        <i class="close icon"></i>
+        <div class="header">
+            {{ error_message }}
+        </div>
+    </div>
+{% endif %}
+
+    <h1>Upload CSV</h1>
+    <form method="post" enctype="multipart/form-data" class="ui form">
+        {% csrf_token %}
+        {{ form }}
+        <button class="ui positive button" type="submit">Add Data</button>
+    </form>
 {% endblock content %}

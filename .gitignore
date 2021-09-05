@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 000*
+media_root/csvs/
