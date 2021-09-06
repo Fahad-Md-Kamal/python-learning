@@ -104,6 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+LOGIN_URL = 'login-view'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 

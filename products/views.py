@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -9,12 +10,14 @@ from products.models import Product, Purchase
 from .utils import get_simple_plot, get_salesman_from_id, get_image
 from .forms import PurchaseForm
 
+
+@login_required
 def sales_dist_view(request):
     df = pd.DataFrame(Purchase.objects.all().values())
     df['salesman_id'] = df['salesman_id'].apply(get_salesman_from_id)
-    df.rename({'salesman_id':'salesman'}, axis=1, inplace=True)
+    df.rename({'salesman_id': 'salesman'}, axis=1, inplace=True)
     df['date'] = df['date'].apply(lambda x: x.strftime('%Y-%m-%d'))
-    
+
     plt.switch_backend('AGG')
     plt.xticks(rotation=45)
     sns.barplot(x='date', y='total_price', hue='salesman', data=df)
@@ -30,6 +33,8 @@ def sales_dist_view(request):
     # return HttpResponse('hello salesman')
     return render(request, 'products/sales.html', context)
 
+
+@login_required
 def chart_select_view(request):
     graph = None
     error_message = None
@@ -84,6 +89,7 @@ def chart_select_view(request):
     return render(request, 'products/main.html', context)
 
 
+@login_required
 def add_purchase_view(request):
     form = PurchaseForm(request.POST or None)
     added_message = None
