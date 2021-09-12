@@ -17,13 +17,13 @@ def all_products(request):
     return render(request, 'store/home.html', context)
 
 
-def product_detail(request, slug):
-    print(request)
-    product = get_object_or_404(Product, slug=slug, in_stock=True)
+def product_detail(request, product_slug):
+    product = get_object_or_404(Product, slug=product_slug, in_stock=True)
     context = {
         'product': product,
     }
     return render(request, 'store/products/detail.html', context)
+
 
 def category_list(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)

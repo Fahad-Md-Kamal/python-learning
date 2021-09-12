@@ -18,7 +18,7 @@ class TestCategoriesModel(TestCase):
         data = self.data1
         self.assertTrue(isinstance(data, models.Category))
 
-    def test_category_model_entry(self):
+    def test_category_url(self):
         """
         Test Category Model default name
         """
@@ -28,19 +28,21 @@ class TestCategoriesModel(TestCase):
 
 class TestProductsModel(TestCase):
     def setUp(self):
-        self.category = models.Category.objects.create(
-            name='django', slug='django')
-        self.user = User.objects.create(username='admin')
+        models.Category.objects.create(name='django', slug='django')
+        User.objects.create(username='admin')
         self.data1 = models.Product.objects.create(
-            category=self.category,
-            created_by=self.user,
+            category_id=1,
             title='django beginners',
-            image='django',
+            created_by_id=1,
             slug='django-beginners',
-            price=20.00,
+            price='20.00',
+            image='django'
         )
 
-    def test_product_model_entry(self):
+    def test_products_model_entry(self):
+        """
+        Test product model data insertion/types/field attributes
+        """
         data = self.data1
         self.assertTrue(isinstance(data, models.Product))
         self.assertEqual(str(data), 'django beginners')
