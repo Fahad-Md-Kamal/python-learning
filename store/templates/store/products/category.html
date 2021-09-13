@@ -1,8 +1,13 @@
 {% extends '../base.html' %}
 {% load static %}
-{% block title %}Home{% endblock title %}
+
+{% block title %}
+    {% if category %} {{ category.name|title }} {% else %} Products {% endif %}
+{% endblock title %}
+
 
 {% block content %}
+
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -35,6 +40,7 @@
         </div>
     </div>
 </div>
+<!-- { endif } -->
 
 
 {% endblock content %}
