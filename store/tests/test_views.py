@@ -1,12 +1,12 @@
 from unittest import skip
 
-from django.test import TestCase, RequestFactory, Client
-from django.urls import reverse
 from django.contrib.auth.models import User
 from django.http import HttpRequest
+from django.test import Client, RequestFactory, TestCase
+from django.urls import reverse
 
 from store.models import Category, Product
-from store.views import all_products
+from store.views import product_all
 
 
 @skip("Demonstration of skipping test")
@@ -26,7 +26,7 @@ class TestViewResponse(TestCase):
             category_id=1,
             title='django beginners',
             created_by_id=1,
-            slug='dj',
+            slug='django-beginners',
             price=20.00,
             image='django',
             in_stock=True
@@ -57,18 +57,27 @@ class TestViewResponse(TestCase):
             reverse('store:category_list', args=['django']))
         self.assertEqual(resp.status_code, 200)
 
+    def test_url_allowed_hosts(self):
+        """
+        Test allowed hosts
+        """
+        resp = self.c.get('/', HTTP_HOST='noaddress.com')
+        self.assertEqual(resp.status_code, 400)
+        resp = self.c.get('/', HTTP_HOST="yourdomain.com")
+        self.assertEqual(resp.status_code, 200)
+
     def test_homepage_html(self):
         request = HttpRequest()
-        resp = all_products(request)
+        resp = product_all(request)
         html = resp.content.decode('utf-8')
-        self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>BookStore</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_funtion(self):
-        request = self.factory.get('/item/django-beginners')
-        resp = all_products(request)
+        request = self.factory.get('/django-beginners')
+        resp = product_all(request)
         html = resp.content.decode('utf-8')
-        self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>BookStore</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(resp.status_code, 200)
