@@ -1,4 +1,9 @@
 {% extends '../base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ product.title }}
+{% endblock title %}
 
 {% block content %}
 <div class="container">
@@ -18,7 +23,7 @@
                             <div class="col-6">Hardback</div>
                             <div class="col-6 text-end">
                                 <span class="h4 fw-bold">$ {{product.price}}</span>
-                               
+
                             </div>
                         </div>
                     </div>

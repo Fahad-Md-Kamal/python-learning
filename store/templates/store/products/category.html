@@ -1,8 +1,26 @@
 {% extends '../base.html' %}
+{% load utils %}
 {% load static %}
-{% block title %}Home{% endblock title %}
+
+{% block title %}
+    {% if category %} {{ category.name|title }} {% else %} Products {% endif %}
+{% endblock title %}
+
 
 {% block content %}
+
+
+<!-- { if request.user.is_superuser }
+
+    <h1>Welcome Superuser</h1>
+
+{ else } -->
+
+{% if not request.user|has_group:"salseman" %} 
+    <p>User belongs to Salseman
+{% else %}
+    <p>User doesn't belong to mygroup</p>
+{% endif %}
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -35,6 +53,7 @@
         </div>
     </div>
 </div>
+<!-- { endif } -->
 
 
 {% endblock content %}
