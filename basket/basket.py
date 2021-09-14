@@ -12,6 +12,13 @@ class Basket():
             basket = self.session['skey'] = {}
         self.basket = basket
 
+    def add(self, product):
+        product_id = product.id
+        if product_id not in self.basket:
+            self.basket[product_id] = {'price': str(product.price)}
+        
+        self.session.modified = True
+
 # from django.contrib.sessions.models import Session
 # s = Session.objects.get(pk='<get_session_key_form_browser_session>')
 # s.get_decoded()
