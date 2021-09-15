@@ -20,7 +20,29 @@ class Basket():
         product_id = product.id
         if product_id not in self.basket:
             self.basket[product_id] = {'price': str(product.price), 'qty': int(qty)}
+        self.save()
 
+    def delete(self, product):
+        """
+        Delete item form session data
+        """
+        product_id = str(product)
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
+
+    def update(self, product, qty):
+        """
+        Udpate values in session data
+        """
+        product_id = str(product)
+
+        if product_id in self.basket:
+            self.basket[product_id]['qty'] = qty
+
+        self.save()
+
+    def save(self):
         self.session.modified = True
 
     def __iter__(self):
@@ -45,6 +67,12 @@ class Basket():
         Get the basket data and count qty of items
         """
         return sum(item['qty'] for item in self.basket.values())
+
+    def get_total_price(self):
+        """
+        Get sub total of the price
+        """
+        return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
 
 
 # from django.contrib.sessions.models import Session
