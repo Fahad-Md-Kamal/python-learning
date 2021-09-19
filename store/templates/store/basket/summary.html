@@ -26,7 +26,7 @@ Basket Summary
                         <div class="row p-3">
                             <div class="col-6">Hardback</div>
                             <div class="col-6 text-end">
-                                <span class="h4 fw-bold">$ {{item.total_price}}</span>
+                                <span class="h4 fw-bold">$ {{item.price}}</span>
 
                             </div>
                         </div>
@@ -85,6 +85,8 @@ Basket Summary
             },
             success: function (json) {
                 $('.product-item[data-index="' + prodid + '"]').remove();
+                document.getElementById('subtotal').innerHTML = json.subtotal
+                document.getElementById('basket-qty').innerHTML = json.qty
             },
             error: function (xhr, errmsg, err) { },
         });
@@ -104,8 +106,7 @@ Basket Summary
                 action: 'post',
             },
             success: function (json) {
-                // $('.product-item[data-index="'+prodid+'"]').remove();
-                console.log(json['success']);
+                document.getElementById('basket-qty').innerHTML = json.qty
                 document.getElementById('basket-qty').innerHTML = json.qty
                 document.getElementById('subtotal').innerHTML = json.subtotal
             },
