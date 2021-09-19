@@ -1,6 +1,7 @@
 
-from store.models import Product
 from decimal import Decimal
+
+from store.models import Product
 
 
 class Basket():
@@ -81,8 +82,3 @@ class Basket():
         Get sub total of the price
         """
         return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
-
-
-# from django.contrib.sessions.models import Session
-# s = Session.objects.get(pk='<get_session_key_form_browser_session>')
-# s.get_decoded()
