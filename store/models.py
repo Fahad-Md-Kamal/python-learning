@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -26,7 +27,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, related_name='product', on_delete=models.CASCADE)
     created_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='product_creator')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='product_creator')
     author = models.CharField(max_length=255, default='admin')
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
@@ -39,7 +40,6 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
     objects = models.Manager()
     products = ProductManger()
-
 
     class Meta:
         verbose_name_plural = 'Products'
