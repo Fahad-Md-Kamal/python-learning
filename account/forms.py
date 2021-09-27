@@ -1,5 +1,21 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from .models import UserBase
+
+
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-3',
+            'placeholder': 'Username',
+            'id': 'login-username'
+        }))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Password',
+            'id': 'login-pwd'
+        }))
 
 
 class RegistrationForm(forms.ModelForm):
@@ -21,7 +37,7 @@ class RegistrationForm(forms.ModelForm):
         widget=forms.PasswordInput
     )
     password2 = forms.CharField(
-        label='Re-enter Password', 
+        label='Re-enter Password',
         widget=forms.PasswordInput
     )
 
