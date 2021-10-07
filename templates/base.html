@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head class="d-flex">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <title>CRUD - {% block title %} {% endblock title %}</title>
+
+<style>
+
+.footer{
+    height: 10em;
+}
+
+</style>
+
+
+  </head>
+  <body>
+      <div class="container-fluid">
+        {% include 'nev.html' %}
+
+    <div class="min-vh-100 pt-5">
+      {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% else %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+
+
+      {% block content %}
+      
+      {% endblock content %}
+    </div>
+    
+   <div class="bg-dark text-light text-center py-5"> Django CRUD Applicaiton </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    {% block js %}
+    {% endblock js %}
+  
+</div>
+  </body>
+</html>
