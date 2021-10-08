@@ -14,11 +14,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'is_available')
     list_editable = ('price', 'is_available')
     prepopulated_fields = {'slug':('name',)}
-    fields = (('name', 'slug'), 'price', 'description', 'category', 'is_available',  'created_by', 'updated_by')
+    fields = (('name', 'slug'), 'price', 'description', 'images', 'category', 'is_available',  'created_by', 'updated_by')
 
 
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Product, ProductAdmin)
-admin.site.register(models.ProductImage)
+# admin.site.register(models.ProductImage)
 
 # Register your models here.
