@@ -78,3 +78,4 @@ def delete_user(request):
     user.save()
     logout(request)
     return redirect('account:delete_confirmation')
+    
